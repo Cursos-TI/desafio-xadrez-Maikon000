@@ -1,110 +1,91 @@
-#include <stdio.h>
+#include <stdio.h> // Biblioteca padrão de entrada e saída
 
-// Desafio de Xadrez - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
-// O objetivo é utilizar estruturas de repetição e funções para determinar os limites de movimentação dentro do jogo.
+// === 1. Void para mover a torre recursivamente. ===
+
+// O comando void indica que a função não retorna nenhum valor.
+
+void moverTorre(int n) {
+    if (n > 0) {
+        printf("Direita\n"); // Movimento horizontal
+        moverTorre(n - 1); // Chamada recursiva
+    }
+}
+
+// === 2. Void para mover o bispo recursivamente. ===
+
+void moverBispoRecursivo(int n) {
+    if (n > 0) {
+        printf("Cima, Direita\n"); // Movimento diagonal
+        moverBispoRecursivo(n - 1); // Chamada recursiva
+    }
+}
+
+// === 3. Void para mover a rainha recursivamente. ===
+
+void moverRainha(int n) {
+    if (n > 0) {
+        printf("Esquerda\n"); // Movimento horizontal
+        moverRainha(n - 1); // Chamada recursiva 
+    }
+}
+
+// Intmain principal do programa.   
 
 int main() {
-    // Nível Novato - Movimentação das Peças
-    // Sugestão: Declare variáveis constantes para representar o número de casas que cada peça pode se mover.
 
-    // Implementação de Movimentação do Bispo
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação do Bispo em diagonal.
+    // === 1. MOVIMENTAÇÃO DA TORRE (Recursiva) ===
 
-    // Implementação de Movimentação da Torre
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Torre para a direita.
+    printf("Movimento da Torre:\n");
+    moverTorre(5); // Move a torre 5 vezes para a direita
+    printf("\n");
 
-    // Implementação de Movimentação da Rainha
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Rainha para a esquerda.
+    // === 2. MOVIMENTAÇÃO DO BISPO (Recursiva + Loops Aninhados) ===
 
-    // Nível Aventureiro - Movimentação do Cavalo
-    // Sugestão: Utilize loops aninhados para simular a movimentação do Cavalo em L.
-    // Um loop pode representar a movimentação horizontal e outro vertical.
-
-    // Nível Mestre - Funções Recursivas e Loops Aninhados
-    // Sugestão: Substitua as movimentações das peças por funções recursivas.
-    // Exemplo: Crie uma função recursiva para o movimento do Bispo.
-
-    // Sugestão: Implemente a movimentação do Cavalo utilizando loops com variáveis múltiplas e condições avançadas.
-    // Inclua o uso de continue e break dentro dos loops.
-
-    // ==========================================================
-
-    printf("Movimento da Torre:\n"); //  imprimi o a frase dentro dos ("...") para o usuario.
-
-    // for é uma estrutura de repetição que vai esta repetindo o movimento do cavalo até deterninado numero. 
+    printf("Movimento do Bispo (Recursivo):\n");
+    moverBispoRecursivo(5); //  Move o bispo 5 vezes na diagonal
     
-    // O loop for tem a parte inicialização do codigo por isso definimos a variavel dentros dos parenteses "(...)"
-    // nessa parte o comando que esta nos parentes vai imprimir até que o valor de "i" seja menor ou igual ao valor de 5.
-    // o valor de i vai ser incrementado pelo comando "i++" até que a que o comando sea falso. 
-    
-    for (int i = 1; i <= 5; i++) {
-        printf("Casa %d: Direita\n", i); //  vai imprimir a direção do movimento.
-    }
+    printf("\nMovimento do Bispo (Loops Aninhados):\n");
 
-    printf("\n\n"); // \n\n serve para pular duas linhas.  
+    // Loop externo para Vertical, interno para Horizontal
 
-    // ===========================================================
-
-    printf("Movimento do Bispo:\n"); //  imprimi o a frase dentro dos ("...") para o usuario.
-
-    int b = 1; // variavel int para definir o valor 'b' 
-
-    // while w um comando loop que vai esta imprimindo a direção do movimento do bispo até que a condiçõa seja falsa.
-
-    while (b <= 5) {
-        printf("Casa %d: diagonal\n", b); //  vai imprimir a direção do movimento.
-        b++; // acrecenta 1 a valor de b. 
-    }
-
-    printf("\n\n"); // \n\n serve para pular duas linhas.
-    
-    // ============================================================
-
-    printf("Movimento da Rainha:\n"); //  imprimi o a frase dentro dos ("...") para o usuario. 
-
-    int r = 1; // variavel int para definir o valor 'r'  
-    do {
-        printf("Casa %d: Esquerda\n", r); //  vai imprimir a direção do movimento.
-        r++;
-    } while (r <= 8);
-
-    // ============================================================
-
-    printf("Movimento da cavalo:\n"); //  linha para separar os dois codigos. 
-
-    
-    int MV = 2;   // Variavel do movimento vertical. 
-    int MH = 1;   // esse a variavei do movimento horizontal do cavalo. 
-
-    printf("\n");  // Linha em branco para separar dos movimentos anteriores
-
-    // Loop externo (for) para alternar entre os eixos do movimento em "L"
-    // i = 0: Eixo Vertical
-    // i = 1: Eixo Horizontal
-    // i++ serve para incrementa 1 a i.
-    //Loops Aninhados:
-    // O for controla a sequência: primeiro ele foca na parte vertical do "L" e depois na horizontal.
-    // O while é o loop interno que executa a repetição das mensagens baseado nas constantes definidas.
-
-    for (int i = 0; i < 2; i++) {
-        
-        int contador = 0;
-
-        if (i == 0) {
-            // Loop interno (while) para o movimento vertical
-            while (contador < MV) {
-                printf("Baixo\n");
-                contador++;
-            }
-        } else {
-            // Loop interno (while) para o movimento horizontal
-            while (contador < MH) {
-                printf("Esquerda\n");
-                contador++;
-            }
+    for (int i = 0; i < 5; i++) // Loop externo para movimento vertical
+    {
+        printf("Cima, "); //    Movimento vertical
+        for (int j = 0; j < 1; j++) // Loop interno para movimento horizontal
+        {
+            printf("Direita\n"); // Movimento horizontal
         }
     }
 
-    return 0; //o comando return 0; dentro da função main é a forma de o seu programa dizer ao Sistema Operacional: "Terminei meu trabalho e correu tudo bem!".
+    printf("\n");  // Comando para pular linha. 
+
+    // === 3. MOVIMENTAÇÃO DA RAINHA (Recursiva). ===
+
+    printf("Movimento da Rainha:\n"); // Indica o início do movimento da rainha.
+    moverRainha(8);                   //  Move a rainha 8 vezes para a esquerda
+    printf("\n");                     //  Comando para pular linha.
+
+    // === 4. MOVIMENTAÇÃO DO CAVALO (Loops Complexos: 2 para Cima, 1 para Direita) ===
+
+    printf("Movimento do Cavalo:\n"); // Indica o início do movimento do cavalo.
+    
+    // Usando loop for com múltiplas variáveis e condições
+    
+    for (int i = 0, j = 0; i < 3; i++) // Loop para controlar os movimentos do cavalo
+    {
+        if (i < 2) // Para os dois primeiros movimentos, executa o movimento vertical
+        {
+            printf("Cima\n"); // Movimento vertical
+            continue; // Força a próxima iteração do loop para completar os movimentos para cima
+        }
+        
+        // Quando i chega a 2, este loop while executa a parte horizontal
+        while (j < 1) {
+            printf("Direita\n"); // Movimento horizontal
+            j++; // Incrementa j para evitar loop infinito
+            break; // Sai do loop interno após 1 execução
+        }
+    }
+
+    return 0; // Indica que o programa terminou com sucesso.
 }
